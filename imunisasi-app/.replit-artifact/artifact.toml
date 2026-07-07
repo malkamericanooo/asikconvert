@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Imunisasi Balita Updater"
+version = "1.0.0"
+id = "artifacts/imunisasi-app"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22329
+
+[services.development]
+run = "pnpm --filter @workspace/imunisasi-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/imunisasi-app", "run", "build" ]
+publicDir = "artifacts/imunisasi-app/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22329"
+BASE_PATH = "/"
