@@ -689,7 +689,11 @@ export async function exportMasterToBlob(
         const newRow = newWs.getRow(r);
         origRow.eachCell({ includeEmpty: true }, (cell, col) => {
           const newCell = newRow.getCell(col);
-          newCell.value = cell.value;
+          let val = cell.value;
+          if (val && typeof val === 'object' && 'sharedFormula' in val) {
+            val = { formula: cell.formula, result: cell.result };
+          }
+          newCell.value = val;
           if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
         });
         newRow.height = origRow.height;
@@ -705,7 +709,11 @@ export async function exportMasterToBlob(
       const newRow = newWs.getRow(r);
       origRow.eachCell({ includeEmpty: true }, (cell, col) => {
         const newCell = newRow.getCell(col);
-        newCell.value = cell.value;
+        let val = cell.value;
+        if (val && typeof val === 'object' && 'sharedFormula' in val) {
+          val = { formula: cell.formula, result: cell.result };
+        }
+        newCell.value = val;
         if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
       });
       newRow.height = origRow.height;
@@ -797,7 +805,11 @@ export async function exportMasterToBlob(
         const newRow = newWs.getRow(newR);
         origRow.eachCell({ includeEmpty: true }, (cell, col) => {
           const newCell = newRow.getCell(col);
-          newCell.value = cell.value;
+          let val = cell.value;
+          if (val && typeof val === 'object' && 'sharedFormula' in val) {
+            val = { formula: cell.formula, result: cell.result };
+          }
+          newCell.value = val;
           if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
         });
         newRow.height = origRow.height;
@@ -823,9 +835,14 @@ export async function exportMasterToBlob(
         const origRow = refOrigWs.getRow(r);
         const newRow = newWs.getRow(r);
         origRow.eachCell({ includeEmpty: true }, (cell, col) => {
-          newRow.getCell(col).value = cell.value;
+          const newCell = newRow.getCell(col);
+          let val = cell.value;
+          if (val && typeof val === 'object' && 'sharedFormula' in val) {
+            val = { formula: cell.formula, result: cell.result };
+          }
+          newCell.value = val;
           if (cell.style)
-            newRow.getCell(col).style = JSON.parse(JSON.stringify(cell.style));
+            newCell.style = JSON.parse(JSON.stringify(cell.style));
         });
         newRow.height = origRow.height;
       }
