@@ -691,10 +691,10 @@ export async function exportMasterToBlob(
           const newCell = newRow.getCell(col);
           let val = cell.value;
           if (val && typeof val === 'object' && 'sharedFormula' in val) {
-            val = { formula: cell.formula, result: cell.result };
+            val = cell.formula ? { formula: cell.formula, result: cell.result } : cell.result;
           }
           newCell.value = val;
-          if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
+          if (cell.style) newCell.style = cell.style;
         });
         newRow.height = origRow.height;
       }
@@ -711,10 +711,10 @@ export async function exportMasterToBlob(
         const newCell = newRow.getCell(col);
         let val = cell.value;
         if (val && typeof val === 'object' && 'sharedFormula' in val) {
-          val = { formula: cell.formula, result: cell.result };
+          val = cell.formula ? { formula: cell.formula, result: cell.result } : cell.result;
         }
         newCell.value = val;
-        if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
+        if (cell.style) newCell.style = cell.style;
       });
       newRow.height = origRow.height;
     }
@@ -741,7 +741,7 @@ export async function exportMasterToBlob(
       if (styleSourceRow) {
         styleSourceRow.eachCell({ includeEmpty: true }, (cell, col) => {
           if (cell.style)
-            newRow.getCell(col).style = JSON.parse(JSON.stringify(cell.style));
+            newRow.getCell(col).style = cell.style;
         });
         newRow.height = styleSourceRow.height;
       }
@@ -807,10 +807,10 @@ export async function exportMasterToBlob(
           const newCell = newRow.getCell(col);
           let val = cell.value;
           if (val && typeof val === 'object' && 'sharedFormula' in val) {
-            val = { formula: cell.formula, result: cell.result };
+            val = cell.formula ? { formula: cell.formula, result: cell.result } : cell.result;
           }
           newCell.value = val;
-          if (cell.style) newCell.style = JSON.parse(JSON.stringify(cell.style));
+          if (cell.style) newCell.style = cell.style;
         });
         newRow.height = origRow.height;
       }
@@ -838,11 +838,11 @@ export async function exportMasterToBlob(
           const newCell = newRow.getCell(col);
           let val = cell.value;
           if (val && typeof val === 'object' && 'sharedFormula' in val) {
-            val = { formula: cell.formula, result: cell.result };
+            val = cell.formula ? { formula: cell.formula, result: cell.result } : cell.result;
           }
           newCell.value = val;
           if (cell.style)
-            newCell.style = JSON.parse(JSON.stringify(cell.style));
+            newCell.style = cell.style;
         });
         newRow.height = origRow.height;
       }
