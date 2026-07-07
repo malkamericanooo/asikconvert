@@ -2,19 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "imunisasi-app/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "imunisasi-app/dist",
-        "buildCommand": "npm run build",
-        "installCommand": "npm install"
+        "distDir": "dist"
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/imunisasi-app/dist/$1"
+      "dest": "/dist/$1"
     }
   ]
 }
