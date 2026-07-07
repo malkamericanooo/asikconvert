@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "./artifacts/imunisasi-app/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "./artifacts/imunisasi-app/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "./artifacts/imunisasi-app/dist/$1"
+    }
+  ]
+}
+
