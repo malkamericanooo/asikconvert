@@ -5,7 +5,9 @@
       "src": "imunisasi-app/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "imunisasi-app/dist"
+        "distDir": "imunisasi-app/dist",
+        "buildCommand": "npm run build",
+        "installCommand": "npm install"
       }
     }
   ],
